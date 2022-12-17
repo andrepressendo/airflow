@@ -1,0 +1,6 @@
+{"custo_de_producao":1300,"desconto_maximo":0.2,"preco_base":5000,"produto_id":"A"}
+{"custo_de_producao":30000,"desconto_maximo":0.5,"preco_base":112000,"produto_id":"B"}
+{"custo_de_producao":600,"desconto_maximo":0.5,"preco_base":2000,"produto_id":"C"}
+{"custo_de_producao":500,"desconto_maximo":0.1,"preco_base":1900,"produto_id":"D"}
+{"custo_de_producao":10000,"desconto_maximo":0.2,"preco_base":40000,"produto_id":"E"}
+{"custo_de_producao":1300,"desconto_maximo":0.1,"preco_base":2000,"produto_id":"F"}
