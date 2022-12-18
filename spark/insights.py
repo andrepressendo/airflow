@@ -7,7 +7,7 @@ from pathlib import Path
 
 BASE_FOLDER = join(
     str(Path("~/airflow").expanduser()),
-    "/home/andre/airflow/datalake/dim_vendas/{stage}/{partition}"
+    "/home/andre/Documents/airflow/datalake/dim_vendas/{stage}/{partition}"
 )
 
 def create_parent_folder(file_path):

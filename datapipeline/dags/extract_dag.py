@@ -3,10 +3,11 @@ import sys
 from datetime import datetime
 from airflow.models import DAG
 # from airflow.operators.extract import ExtractOperator
-from airflow_plugin import ExtractOperator
+from operators.extract_operator import ExtractOperator
 
 #!pip install apache-airflow-providers-apache-spark
-from airflow.contrib.operators.spark_submit_operator import SparkSubmitOperator
+#from airflow.contrib.operators.spark_submit_operator import SparkSubmitOperator
+from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from airflow.utils.dates import days_ago
 
 ARGS = {
@@ -31,7 +32,7 @@ with DAG(
         url="https://s3.amazonaws.com/gupy5/production/companies/7198/emails/1669313089815/d0dc9130-6c21-11ed-b5b6-af1378b9873a/vendedores.json",
         file="vendedores",
         file_path=join(
-            "/home/andre/airflow/datalake/dim_vendas/bronze",
+            "/home/andre/Documents/airflow/datalake/dim_vendas/bronze",
             #"vendedores",
             "vendedores.json"
         )
@@ -43,7 +44,7 @@ with DAG(
         url="https://s3.amazonaws.com/gupy5/production/companies/7198/emails/1669313089802/d0d7fd50-6c21-11ed-b062-6369d69cae2d/produtos.json",
         file="produtos",
         file_path=join(
-            "/home/andre/airflow/datalake/dim_vendas/bronze",
+            "/home/andre/Documents/airflow/datalake/dim_vendas/bronze",
             #"produtos",
             "produtos.json"
         )
@@ -51,19 +52,19 @@ with DAG(
 
     json_transform = SparkSubmitOperator(
         task_id="transform_json",
-        application="/home/andre/airflow/spark/transformation.py",
+        application="/home/andre/Documents/airflow/spark/transformation.py",
         name="transform_json",
         application_args=[
             "--src",
-            "/home/andre/airflow/datalake/dim_vendas/bronze",
+            "/home/andre/Documents/airflow/datalake/dim_vendas/bronze",
             "--dest",
-            "/home/andre/airflow/datalake/dim_vendas/silver"
+            "/home/andre/Documents/airflow/datalake/dim_vendas/silver"
         ]
     )
 
     json_insights = SparkSubmitOperator(
         task_id="insights_json",
-        application="/home/andre/airflow/spark/insights.py",
+        application="/home/andre/Documents/airflow/spark/insights.py",
         name="insights_json",
         application_args=[
             "--src",
